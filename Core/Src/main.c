@@ -36,7 +36,7 @@
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
-
+#define LED_FLASH_COUNT 5u
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
@@ -49,7 +49,7 @@
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 /* USER CODE BEGIN PFP */
-
+void delay(void);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -93,12 +93,87 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  /* Local variable to be used in delay */
+	  int i;
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+	  for(i=0;i<LED_FLASH_COUNT;i++)
+	  {
+		  /*Configure GPIO pin Output Level */
+		  HAL_GPIO_WritePin(LD4_GPIO_Port, LD4_Pin, GPIO_PIN_RESET);
+
+		  /* delay to keep LED off */
+		  delay();
+
+		  /*Configure GPIO pin Output Level */
+		  HAL_GPIO_WritePin(LD4_GPIO_Port, LD4_Pin, GPIO_PIN_SET);
+
+		  /* Delay to keep LED ON  */
+		  delay();
+	  }
+	  HAL_GPIO_WritePin(LD4_GPIO_Port, LD4_Pin, GPIO_PIN_RESET);
+	  for(i=0;i<LED_FLASH_COUNT;i++)
+	  {
+		  /*Configure GPIO pin Output Level */
+		  HAL_GPIO_WritePin(LD4_GPIO_Port, LD6_Pin, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(LD4_GPIO_Port, LD3_Pin, GPIO_PIN_RESET);
+
+		  /* delay to keep LED off */
+		  delay();
+
+		  /*Configure GPIO pin Output Level */
+		  HAL_GPIO_WritePin(LD4_GPIO_Port, LD6_Pin, GPIO_PIN_SET);
+		  HAL_GPIO_WritePin(LD4_GPIO_Port, LD3_Pin, GPIO_PIN_SET);
+		  /* Delay to keep LED ON  */
+		  delay();
+	  }
+	  HAL_GPIO_WritePin(LD4_GPIO_Port, LD6_Pin, GPIO_PIN_RESET);
+	  HAL_GPIO_WritePin(LD4_GPIO_Port, LD3_Pin, GPIO_PIN_RESET);
+	  for(i=0;i<LED_FLASH_COUNT;i++)
+	  {
+		  /*Configure GPIO pin Output Level */
+		  HAL_GPIO_WritePin(LD4_GPIO_Port, LD5_Pin, GPIO_PIN_RESET);
+
+		  /* delay to keep LED off */
+		  delay();
+
+		  /*Configure GPIO pin Output Level */
+		  HAL_GPIO_WritePin(LD4_GPIO_Port, LD5_Pin, GPIO_PIN_SET);
+
+		  /* Delay to keep LED ON  */
+		  delay();
+	  }
+	  HAL_GPIO_WritePin(LD4_GPIO_Port, LD5_Pin, GPIO_PIN_RESET);
+	  for(i=0;i<LED_FLASH_COUNT;i++)
+	  {
+		  /*Configure GPIO pin Output Level */
+		  HAL_GPIO_WritePin(LD4_GPIO_Port, LD6_Pin, GPIO_PIN_RESET);
+		  HAL_GPIO_WritePin(LD4_GPIO_Port, LD3_Pin, GPIO_PIN_RESET);
+
+		  /* delay to keep LED off */
+		  delay();
+
+		  /*Configure GPIO pin Output Level */
+		  HAL_GPIO_WritePin(LD4_GPIO_Port, LD6_Pin, GPIO_PIN_SET);
+		  HAL_GPIO_WritePin(LD4_GPIO_Port, LD3_Pin, GPIO_PIN_SET);
+		  /* Delay to keep LED ON  */
+		  delay();
+	  }
+	  HAL_GPIO_WritePin(LD4_GPIO_Port, LD6_Pin, GPIO_PIN_RESET);
+	  HAL_GPIO_WritePin(LD4_GPIO_Port, LD3_Pin, GPIO_PIN_RESET);
   }
   /* USER CODE END 3 */
 }
+
+void delay(void)
+{
+	int i,j;
+	for(i=0;i<200u;i++)
+	  for(j=0;j<3000u;j++);
+}
+
 
 /**
   * @brief System Clock Configuration
